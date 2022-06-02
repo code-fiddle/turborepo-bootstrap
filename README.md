@@ -1,20 +1,39 @@
-# Turborepo starter with pnpm
+# Turborepo Bootstrap
 
-This is an official starter turborepo.
+Includes:
 
-## What's inside?
+- Apps:
+  - React Mobx Starter App
+- Packages:
+  - Shared `tsconfigs`
+  - Shared `eslint`
+  - Shared MobX types
+  - Shared Types
+  - Shared UI Components
 
-This turborepo uses [pnpm](https://pnpm.io) as a packages manager. It includes the following packages/apps:
+## Good things to know
 
-### Apps and Packages
+- Package Manager: [pnpm](https://pnpm.io) - advantages: workspaces, just one `node_modules` folder with symlinks
+- Shared Packages can be included into apps via package name:
 
-- `docs`: a [Next.js](https://nextjs.org) app
-- `web`: another [Next.js](https://nextjs.org) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+```
+{
+  ...
+  "dependencies": {
+    ...
+    "shared-types": "workspace:*"
+    ...
+  }
+}
+```
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Can be imported into `ts` files with:
+
+```ts
+import { CatRoute } from "shared-types";
+```
+
+Example: [`cats.ts`](./apps/web/src/models/api/cats.ts)
 
 ### Utilities
 
@@ -44,25 +63,6 @@ To develop all apps and packages, run the following command:
 ```
 cd my-turborepo
 pnpm run dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching (Beta)](https://turborepo.org/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching (Beta) you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-pnpx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
-
-```
-pnpx turbo link
 ```
 
 ## Useful Links
