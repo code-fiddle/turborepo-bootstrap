@@ -3,6 +3,7 @@ import { SECOND } from '../../constants/duration.const'
 import { request } from '../../helpers/api'
 import { getRootStore } from '../helpers'
 import { StateAndCacheKey } from './stateAndCache'
+import { Cat } from 'mobxtypes/src/index'
 
 export const CATS_API_V1 = import.meta.env.VITE_CATS_API_V1
 
@@ -10,13 +11,6 @@ export enum CatRoute {
 	IMAGES = 'images',
 	SEARCH = 'search',
 }
-
-export const Cat = types.model('Cat', {
-	id: types.identifier,
-	url: types.string,
-	width: types.number,
-	height: types.number,
-})
 
 export const Cats = types
 	.model('Cats', {

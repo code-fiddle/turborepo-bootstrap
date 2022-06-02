@@ -26,7 +26,8 @@
 		"react": "18.1.0",
 		"react-dom": "18.1.0",
 		"react-i18next": "^11.16.9",
-		"react-icons": "^4.4.0"
+		"react-icons": "^4.4.0",
+		"mobxtypes": "workspace:*"
 	},
 	"devDependencies": {
 		"@babel/core": "7.18.2",
@@ -36,7 +37,6 @@
 		"@vitejs/plugin-react": "1.3.2",
 		"autoprefixer": "^10.4.7",
 		"eslint-config-custom": "workspace:*",
-		"eslint": "8.16.0",
 		"postcss": "^8.4.14",
 		"prettier": "2.6.2",
 		"rollup-plugin-analyzer": "4.0.0",
