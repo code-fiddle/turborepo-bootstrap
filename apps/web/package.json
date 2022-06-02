@@ -27,7 +27,8 @@
 		"react-dom": "18.1.0",
 		"react-i18next": "^11.16.9",
 		"react-icons": "^4.4.0",
-		"mobxtypes": "workspace:*"
+		"mobxtypes": "workspace:*",
+		"shared-types": "workspace:*"
 	},
 	"devDependencies": {
 		"@babel/core": "7.18.2",

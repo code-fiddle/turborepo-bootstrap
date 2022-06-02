@@ -41,6 +41,7 @@ importers:
       react-icons: ^4.4.0
       rollup-plugin-analyzer: 4.0.0
       sass: 1.52.1
+      shared-types: workspace:*
       tailwindcss: ^3.0.24
       tsconfig: workspace:*
       typescript: ^4.7.2
@@ -64,6 +65,7 @@ importers:
       react-dom: 18.1.0_react@18.1.0
       react-i18next: 11.16.9_mqft7h2hndup6oyqvtfsfspurq
       react-icons: 4.4.0_react@18.1.0
+      shared-types: link:../../packages/shared-types
     devDependencies:
       '@babel/core': 7.18.2
       '@types/node': 17.0.38
@@ -113,6 +115,40 @@ importers:
     dependencies:
       mobx: 6.6.0
       mobx-state-tree: 5.1.5_mobx@6.6.0
+    devDependencies:
+      '@babel/core': 7.18.2
+      '@types/node': 17.0.38
+      '@types/react': 18.0.10
+      '@types/react-dom': 18.0.5
+      '@vitejs/plugin-react': 1.3.2
+      autoprefixer: 10.4.7_postcss@8.4.14
+      eslint-config-custom: link:../eslint-config-acme
+      postcss: 8.4.14
+      prettier: 2.6.2
+      rollup-plugin-analyzer: 4.0.0
+      sass: 1.52.1
+      tailwindcss: 3.0.24
+      tsconfig: link:../tsconfig
+      typescript: 4.7.2
+      vite: 2.9.9_sass@1.52.1
+
+  packages/shared-types:
+    specifiers:
+      '@babel/core': 7.18.2
+      '@types/node': 17.0.38
+      '@types/react': 18.0.10
+      '@types/react-dom': 18.0.5
+      '@vitejs/plugin-react': 1.3.2
+      autoprefixer: ^10.4.7
+      eslint-config-custom: workspace:*
+      postcss: ^8.4.14
+      prettier: 2.6.2
+      rollup-plugin-analyzer: 4.0.0
+      sass: 1.52.1
+      tailwindcss: ^3.0.24
+      tsconfig: workspace:*
+      typescript: ^4.7.2
+      vite: 2.9.9
     devDependencies:
       '@babel/core': 7.18.2
       '@types/node': 17.0.38

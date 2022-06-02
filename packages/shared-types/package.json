@@ -1,14 +1,10 @@
 {
-	"name": "mobxtypes",
+	"name": "shared-types",
 	"version": "0.0.1",
 	"main": "./src/index.ts",
 	"types": "./src/index.ts",
 	"scripts": {
 		"build": "tsc --p ./tsconfig.json"
-	},
-	"dependencies": {
-		"mobx": "6.6.0",
-		"mobx-state-tree": "5.1.5"
 	},
 	"devDependencies": {
 		"@babel/core": "7.18.2",
