@@ -1,5 +1,7 @@
 # react-mobx-starter
 
+todo: https://reactflow.dev/docs/guides/state-management/
+
 ## dev
 
 ```bash
