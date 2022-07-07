@@ -8,7 +8,9 @@ import ReactFlow, {
 	applyEdgeChanges,
 	applyNodeChanges,
 	NodeChange,
+	EdgeChange,
 	Node,
+	Connection,
 } from 'react-flow-renderer'
 
 export const FlowPage = types
@@ -48,14 +50,7 @@ export const FlowPage = types
 				{ id: '1', data: { label: 'Node yay' }, position: { x: 100, y: 100 } },
 				{ id: '2', data: { label: 'Node 2' }, position: { x: 100, y: 200 } },
 			])
-			;(self.nnodes = [
-				{ id: '1', data: { label: 'Node yay' }, position: { x: 100, y: 100 } },
-				{ id: '2', data: { label: 'Node 2' }, position: { x: 100, y: 200 } },
-			]),
-				(self.edges = cast([{ id: 'e1-2', source: '1', target: '2' }]))
-			// setTimeout(() => {
-			// 	this.updateFirstNode()
-			// }, 1000)
+			self.edges = cast([{ id: 'e1-2', source: '1', target: '2' }])
 		},
 
 		updateFirstNode() {
@@ -63,23 +58,59 @@ export const FlowPage = types
 		},
 
 		onNodesChange: (changes: NodeChange[]) => {
-			const updatedNodes = applyNodeChanges(changes, self.nnodes)
-			self.nnodes.push(...updatedNodes)
+			const updatedNodes = applyNodeChanges(changes, self.nodes)
+			for (const updatedNode of updatedNodes) {
+				for (const node of self.nodes) {
+					if (updatedNode.id === node.id) {
+						// console.log(`changing node ${node.id}`)
+						node.position.x = updatedNode.position.x
+						node.position.y = updatedNode.position.y
+					}
+				}
+			}
+			// self.nodes.push(...updatedNodes)
 		},
 
-		updateNode(event: any) {
-			if (Array.isArray(event)) {
-				event.forEach((eventItem) => {
-					console.log(eventItem)
-					if (eventItem.id && eventItem.position) {
-						const foundNode = self.nodes.find(
-							(currentNode) => currentNode.id === eventItem.id,
-						)
-						if (foundNode) {
-							foundNode.position = eventItem.position
-						}
-					}
-				})
+		onEdgeChange: (changes: any[]) => {
+			for (const edge of self.edges) {
+				if (edge.id === changes[0].id) {
+					self.edges.remove(edge)
+					return
+				}
+			}
+		},
+
+		onConnect: (connection: Connection) => {
+			// applyEdgeChanges()
+			self.edges.push({
+				id: `${connection.source}-${connection.target}`,
+				source: String(connection.source),
+				target: String(connection.target),
+			})
+		},
+
+		addNode: () => {
+			const ids: number[] = self.nodes.map((node) => Number(node.id))
+			const maxId = Math.max(...ids)
+			const newId = String(maxId + 1)
+			self.nodes.push({
+				id: newId,
+				data: {
+					label: `Node ${newId}`,
+				},
+				position: {
+					x: 50,
+					y: 50,
+				},
+			})
+		},
+
+		removeEdge: (id: string) => {
+			for (const edge of self.edges) {
+				if (edge.id === id) {
+					self.edges.remove(edge)
+					return
+				}
 			}
 		},
 	}))
@@ -90,6 +121,18 @@ export const FlowPage = types
 
 		getNodes() {
 			// console.log(JSON.stringify(self.nodes))
-			return self.nnodes
+			// return self.nodes
+			return JSON.parse(JSON.stringify(self.nodes))
+		},
+
+		getEdges() {
+			// return JSON.parse(JSON.stringify(self.edges))
+			return self.edges.map((edge) => {
+				return {
+					id: edge.id,
+					source: edge.source,
+					target: edge.target,
+				}
+			})
 		},
 	}))

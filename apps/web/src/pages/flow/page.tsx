@@ -8,6 +8,7 @@ import ReactFlow, {
 	applyEdgeChanges,
 	applyNodeChanges,
 } from 'react-flow-renderer'
+import { Button } from '@chakra-ui/react'
 
 const flowKey = 'example-flow'
 
@@ -27,44 +28,24 @@ export default observer(() => {
 		},
 	} = useMst()
 
-	// const [nodes, setNodes, onNodesChange] = useNodesState([])
-	// const [edges, setEdges, onEdgesChange] = useEdgesState([])
-
 	return (
-		<ReactFlow
-			nodes={page.getNodes()}
-			edges={page.edges}
-			style={{ width: '500px', height: '500px' }}
-			onNodesChange={(event) => {
-				page.onNodesChange(event)
-				// applyNodeChanges(event, page.nodes)
-			}}
-			onEdgesChange={(event: any) => console.log(event)}
-			// onConnect={onConnect}
-		>
-			<MiniMap />
-			<Controls />
-		</ReactFlow>
+		<>
+			<Button onClick={() => page.addNode()}>Add Node</Button>
+			<ReactFlow
+				nodes={page.getNodes()}
+				edges={page.getEdges()}
+				style={{ width: '500px', height: '500px' }}
+				onNodesChange={(event) => {
+					page.onNodesChange(event)
+					// applyNodeChanges(event, page.nodes)
+				}}
+				onEdgesChange={(event: any) => page.onEdgeChange(event)}
+				// onConnect={onConnect}
+				onConnect={(event) => page.onConnect(event)}
+			>
+				<MiniMap />
+				<Controls />
+			</ReactFlow>
+		</>
 	)
 })
-
-function Flow(props: {
-	nodes: any
-	edges: any
-	onNodesChange: any
-	// onEdgesChange: any
-}) {
-	return (
-		<ReactFlow
-			nodes={props.nodes}
-			edges={props.edges}
-			style={{ width: '500px', height: '500px' }}
-			onNodesChange={props.onNodesChange}
-			onEdgesChange={(event: any) => console.log(event)}
-			// onConnect={onConnect}
-		>
-			<MiniMap />
-			<Controls />
-		</ReactFlow>
-	)
-}
