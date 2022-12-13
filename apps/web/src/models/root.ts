@@ -1,9 +1,10 @@
 import { RouterStore } from 'mobx-router'
 import { Instance, types } from 'mobx-state-tree'
-import { createContext, useContext } from 'react'
+import { useContext } from 'react'
 import { NotFoundPage } from '../pages/404/model'
 import { CatsPage } from '../pages/cats/model'
 import ApiStore, { APIType } from './api'
+import { RootStoreContext } from './context'
 
 const PagesStore = types.model('Pages', {
 	notFound: types.optional(NotFoundPage, () => NotFoundPage.create()),
@@ -34,10 +35,6 @@ export class RootStore {
 }
 
 export const rootStore = new RootStore()
-
-const RootStoreContext = createContext<null | RootStore>(null)
-
-export const Provider = RootStoreContext.Provider
 
 export function useMst() {
 	const store = useContext(RootStoreContext)
